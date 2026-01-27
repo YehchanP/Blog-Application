@@ -3,28 +3,11 @@ import { assets, blog_data } from '@/Assets/assets';
 import Footer from '@/Components/Footer';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react'
 
-const page = ({params}) => {
-    const [data,setData] = useState(null);
-
+const BlogPage = ({params}) => {
     const {id} = React.use(params);
 
-    const fetchBlogData = () =>{
-        for(let i = 0;i<blog_data.length;i++){
-            if(Number(id)===blog_data[i].id){
-                setData(blog_data[i]);
-                console.log(blog_data[i]);
-                console.log("fetchedBlogData")
-                break;
-            }
-
-        }
-    }
-
-    useEffect(()=>{
-        fetchBlogData();
-    },[])
+    const data = blog_data.find((blog) => Number(id) === blog.id);
 
   return (data?<>
     <div className='bg-gray-200 py-5 px-5 md:px-12 lg:px-28'>
@@ -71,4 +54,4 @@ const page = ({params}) => {
   )
 }
 
-export default page
+export default BlogPage
